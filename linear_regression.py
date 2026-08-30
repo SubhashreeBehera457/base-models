@@ -28,12 +28,14 @@ class SimpleLinearRegression:
         None
             Sets self.coef_ and self.intercept_ as side effects.
         """
+        x_mean =  X_train.mean()
+        y_mean = y_train.mean()
         numerator = 0
         denomenator = 0
 
         for i in range(X_train.shape[0]):
-            numerator = numerator + ((X_train[i] - X_train.mean()) * (y_train[i] - y_train.mean()))
-            denomenator = denomenator + (X_train[i] - X_train.mean())**2
+            numerator = numerator + ((X_train[i] - x_mean) * (y_train[i] - y_mean))
+            denomenator = denomenator + (X_train[i] - x_mean)**2
 
         self.coef_ = numerator / denomenator
         self.intercept_ = y_train.mean() - self.coef_ * X_train.mean()
